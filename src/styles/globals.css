@@ -18,3 +18,9 @@ body{
   background-color: var(--black);
   color: var(--white);
 }
+
+a {
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+}
