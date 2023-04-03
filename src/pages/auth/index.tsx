@@ -4,6 +4,7 @@ import styles from './Auth.module.css'
 import { type FormEvent, useState } from 'react'
 import Logo from '@/components/Logo'
 import Button from '@/components/Button'
+import ErrorMessage from '@/components/ErrorMessage'
 
 const AuthPage: React.FC = () => {
   const [username, setUsername] = useState('')
@@ -21,16 +22,16 @@ const AuthPage: React.FC = () => {
     <>
       <section className={styles.section}>
         <header className={styles.header}>
-          <Logo md/>
-          <h2>Welcome to </h2>
+          <Logo size='lg'/>
         </header>
         <form onSubmit={handleSubmit} className={styles.form}>
+          <h2>Welcome</h2>
           <label className={styles.label}>
             <p>What is your name?</p>
             <input placeholder='Type here' required type='text' onChange={(e) => { setUsername(e.target.value) }} value={username}/>
           </label>
-          <small>{error}</small>
-          <Button type='submit'>Save</Button>
+          <ErrorMessage message={error}/>
+          <Button disabled={username === ''} type='submit'>Get me inside!</Button>
         </form>
       </section>
     </>
