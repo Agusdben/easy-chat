@@ -1,3 +1,5 @@
+import Layout from '@/components/Layout'
+import SocketConnectedRoute from '@/components/SocketConnectedRoute'
 import SocketContextProvider from '@/context/SocketContext'
 import UserContextProvider from '@/context/UserContext'
 import '@/styles/globals.css'
@@ -7,7 +9,11 @@ export default function App ({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SocketContextProvider>
       <UserContextProvider>
-        <Component {...pageProps} />
+          <Layout>
+            <SocketConnectedRoute>
+              <Component {...pageProps} />
+            </SocketConnectedRoute>
+          </Layout>
       </UserContextProvider>
     </SocketContextProvider>
   )

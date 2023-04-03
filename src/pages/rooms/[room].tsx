@@ -1,5 +1,4 @@
 import AuthRoute from '@/components/AuthRoute'
-import Layout from '@/components/Layout'
 import useSocket from '@/hooks/useSocket'
 import useUser from '@/hooks/useUser'
 import { type Message } from '@/types/message'
@@ -42,8 +41,9 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
     return () => {
       socket.off('server:receive_message', onServerReceiveMessage)
       socket.off('server:user_join', onServerUserJoin)
+      socket.emit('client:left_room', { username: user?.username, roomName })
     }
-  }, [socket, isConnected, roomName, user?.username])
+  }, [socket, isConnected, roomName, user])
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -63,7 +63,6 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
 
   return (
     <AuthRoute>
-      <Layout>
         <p>{user?.username}</p>
         <form onSubmit={handleSubmitMessage}>
           <input required type='text' placeholder='Type a message' onChange={(e) => { setNewMessage(e.target.value) }}/>
@@ -73,7 +72,12 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
             messageList.map(msg => <div key={msg.date.toString()}>{msg.message}</div>)
           }
         </section>
-      </Layout>
+        <section>
+          <h1>USERS:</h1>
+          {
+            room?.users.map(user => <div key={user}>{user}</div>)
+          }
+        </section>
     </AuthRoute>
   )
 }

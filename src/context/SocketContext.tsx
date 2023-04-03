@@ -3,7 +3,7 @@ import { io, type Socket } from 'socket.io-client'
 
 interface Context {
   socket: Socket | undefined | null
-  isConnected: boolean | undefined | null
+  isConnected: boolean | undefined
 }
 
 export const SocketContext = createContext<Context>({ socket: undefined, isConnected: undefined })
@@ -35,17 +35,30 @@ const SocketContextProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (isConnected === true) return
+    if (isConnected === true || isConnected === false) return
 
     const onConnect = (): void => {
+      clearTimeout(unableToConnect)
       setIsConnected(true)
+    }
+    const onDisconnect = (): void => {
+      setIsConnected(false)
     }
 
     socket?.connect()
     socket?.on('connect', onConnect)
+    socket?.on('disconnect', onDisconnect)
+
+    const unableToConnect = setTimeout(() => {
+      if (isConnected === undefined) {
+        onDisconnect()
+        socket?.disconnect()
+      }
+    }, 2 * 60 * 1000) // 2 min
 
     return () => {
       socket?.off('connect', onConnect)
+      clearTimeout(unableToConnect)
     }
   }, [socket, isConnected])
 

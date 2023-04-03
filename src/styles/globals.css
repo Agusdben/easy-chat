@@ -1,8 +1,19 @@
 :root{
-  --primary: #575757;
-  --secondary: #969696;
+  --color-primary: #8f0;
+  --color-secondary: #ff2;
   --white: #fafafa;
   --black: #0e0e0e;
+  --black-700: #1e1e1e;
+
+  --size-sm: 320px;
+  --size-md: 768px;
+  --size-lg: 1024px;
+  --size-xl: 1280px;
+
+  --break-point-sm: var(--size-sm);
+  --break-point-md: var(--size-md);
+  --break-point-lg: var(--size-lg);
+  --break-point-xl: var(--size-xl);
 }
 
 *,
@@ -17,10 +28,67 @@ body{
   overflow-x: hidden;
   background-color: var(--black);
   color: var(--white);
+  font-size: 18px;
 }
 
 a {
   text-decoration: none;
   color: var(--white);
   display: block;
+}
+
+p {
+  margin: 0;
+}
+
+p:last-child{
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+}
+
+input {
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: .7rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  transition-property: outline;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+  color: var(--white);
+}
+
+input{
+  text-align: center;
+}
+
+input::placeholder{
+  color: var(--white);
+  opacity: .5;
+  text-align: center;
+  transition-property: opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+input:hover::placeholder{
+  opacity: .7;
+}
+
+input:hover,
+input:focus {
+  outline: 1px solid var(--color-primary);
+}
+
+svg {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+  font-size: 1.5rem;
 }

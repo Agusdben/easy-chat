@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: .5rem;
+}
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  animation: dot-animation 1.5s infinite;
+}
+
+@keyframes dot-animation {
+  0%, 100% {
+    opacity: .2;
+  }
+  20%, 80% {
+    opacity: 1;
+  }
+}
+
+.dot:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+
+.dot:nth-of-type(3) {
+  animation-delay: 1s;
+}

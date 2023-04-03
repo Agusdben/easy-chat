@@ -1,0 +1,16 @@
+.button {
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  color: var(--black);
+  text-align: center;
+  padding: .7rem 1rem;
+  transition: transform 150ms;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(2px);
+}
