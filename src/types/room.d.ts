@@ -1,7 +1,7 @@
 export interface Room {
   roomName: string
   creator: string
-  userNumber: number
+  usersNumber: number
   users: string[]
 }
 

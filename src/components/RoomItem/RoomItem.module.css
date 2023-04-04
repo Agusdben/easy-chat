@@ -1,0 +1,32 @@
+.room {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem .5rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  background-color: var(--black);
+}
+
+.room_info{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.user_connected{
+  font-size: 1rem;
+  display: flex;
+  gap: .5rem;
+}
+
+.user_connected svg {
+  font-size: inherit;
+}
+
+.creator_container {
+  text-align: center;
+}
+
+.creator {
+  color: var(--color-primary);
+}

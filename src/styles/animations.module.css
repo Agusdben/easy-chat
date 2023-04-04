@@ -1,15 +1,15 @@
 .pulse {
   animation-name: pulse;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
-    transform: scale(1);
+    transform: scale(.8);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.1);
   }
 }

@@ -15,10 +15,10 @@ const SocketConnectedRoute: React.FC<Props> = ({ children }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (isConnected === undefined || isConnected === true) return
-
-    router.push('/500')
-      .catch(error => { console.error(error) })
+    if (isConnected === false) {
+      router.push('/500')
+        .catch(error => { console.error(error) })
+    }
   }, [isConnected, router])
 
   if (isConnected === undefined) {

@@ -1,0 +1,54 @@
+import React, { type FormEvent, useState, useEffect } from 'react'
+import Button from '../Button'
+import useUser from '@/hooks/useUser'
+import { type NewRoom } from '@/types/room'
+import useSocket from '@/hooks/useSocket'
+import styles from './CreateRoomForm.module.css'
+
+const CreateRoomForm: React.FC = () => {
+  const { user } = useUser()
+  const { handleCreateRoom } = useSocket()
+  const [room, setRoom] = useState('')
+  const [error, setError] = useState('')
+
+  const { socket } = useSocket()
+
+  useEffect(() => {
+    const onServerError = (error: string): void => {
+      setError(error)
+    }
+
+    socket?.on('server:error', onServerError)
+
+    return () => {
+      socket?.off('server:error', onServerError)
+    }
+  }, [socket])
+
+  const handleSubmitRoom = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    setError('')
+    if (room === '') {
+      setError('Invalid room name')
+      return
+    }
+
+    const newRoom: NewRoom = {
+      roomName: room,
+      creator: user?.username ?? ''
+    }
+
+    handleCreateRoom(newRoom)
+    setRoom('')
+  }
+
+  return (
+    <form onSubmit={handleSubmitRoom} className={styles.room_form}>
+      <input placeholder='enter room name' required onChange={(e) => { setRoom(e.target.value) }} value={room}/>
+      <small>{error}</small>
+      <Button type='submit'>Create</Button>
+    </form>
+  )
+}
+
+export default CreateRoomForm

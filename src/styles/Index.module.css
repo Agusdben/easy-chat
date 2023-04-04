@@ -1,0 +1,15 @@
+.section {
+  overflow: hidden;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  height: 100%;
+}
+
+.rooms{
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  background-color: var(--black-700);
+}

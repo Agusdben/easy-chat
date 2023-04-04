@@ -1,12 +1,13 @@
 .app{
-  min-height: 100vh;
-  max-width: var(--break-point-xl);
+  height: 100vh;
+  max-width: var(--size-xl);
   margin: auto;
   display: grid;
+  gap: 1rem;
   grid-template-rows: auto minmax(640px, 1fr) auto;
   grid-template-columns: 1fr;
 }
 
 .main {
-  
+  padding: .5rem;
 }

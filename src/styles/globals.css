@@ -37,16 +37,18 @@ a {
   display: block;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 h1,h2,h3,h4{
   margin: 5px;
 }
 
 p {
   margin: 0;
-}
-
-p:last-child{
-  margin-bottom: 1rem;
 }
 
 button {
@@ -95,4 +97,19 @@ svg {
   fill: var(--color-primary);
   stroke: var(--color-primary);
   font-size: 1.5rem;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  padding: 0 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
 }

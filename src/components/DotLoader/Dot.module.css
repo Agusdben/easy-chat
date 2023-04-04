@@ -1,6 +1,7 @@
 .container {
   display: flex;
   gap: .5rem;
+  margin: auto;
 }
 .dot {
   width: 5px;
