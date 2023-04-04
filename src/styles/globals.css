@@ -59,7 +59,7 @@ button {
   color: var(--white);
 }
 
-input {
+input[type='text'] {
   outline: none;
   border-radius: 5px;
   width: 100%;
@@ -72,7 +72,7 @@ input {
   color: var(--white);
 }
 
-input::placeholder{
+input[type='text']::placeholder{
   color: var(--white);
   opacity: .5;
   transition-property: opacity;
@@ -80,12 +80,12 @@ input::placeholder{
   transition-timing-function: ease;
 }
 
-input:hover::placeholder{
+input[type='text']:hover::placeholder{
   opacity: .7;
 }
 
-input:hover,
-input:focus {
+input[type='text']:hover,
+input[type='text']:focus {
   outline: 1px solid var(--color-primary);
 }
 
