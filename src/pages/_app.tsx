@@ -7,11 +7,11 @@ import type { AppProps } from 'next/app'
 export default function App ({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <SocketContextProvider>
-      <Layout>
-        <UserContextProvider>
-          <Component {...pageProps} />
-        </UserContextProvider>
-      </Layout>
+      <UserContextProvider>
+        <Layout>
+            <Component {...pageProps} />
+        </Layout>
+      </UserContextProvider>
     </SocketContextProvider>
   )
 }

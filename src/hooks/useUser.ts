@@ -19,6 +19,7 @@ const useUser = (): ReturnTypes => {
 
     const onUserAuthenticated = ({ username }: UserUsername): void => {
       setUser({ username })
+      console.log(username)
       router.push('/')
         .catch(error => {
           console.error(error)

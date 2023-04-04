@@ -44,7 +44,7 @@ const CreateRoomForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmitRoom} className={styles.room_form}>
-      <input placeholder='enter room name' required onChange={(e) => { setRoom(e.target.value) }} value={room}/>
+      <input placeholder='enter room name' minLength={3} maxLength={20} required onChange={(e) => { setRoom(e.target.value) }} value={room}/>
       <small>{error}</small>
       <Button type='submit'>Create</Button>
     </form>

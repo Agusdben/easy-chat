@@ -1,5 +1,4 @@
 .section {
-  overflow: hidden;
   display: flex;
   gap: 1rem;
   flex-direction: column;
@@ -11,5 +10,5 @@
   flex: 1;
   display: flex;
   overflow: auto;
-  background-color: var(--black-700);
+  background-color: var(--black-800);
 }

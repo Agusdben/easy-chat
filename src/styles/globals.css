@@ -1,9 +1,10 @@
 :root{
-  --color-primary: #8f0;
+  --color-primary: #5a2;
   --color-secondary: #ff2;
   --white: #fafafa;
-  --black: #0e0e0e;
-  --black-700: #1e1e1e;
+  --black: #050505;
+  --black-900: #111;
+  --black-800: #151515;
 
   --size-sm: 320px;
   --size-md: 768px;
@@ -71,14 +72,9 @@ input {
   color: var(--white);
 }
 
-input{
-  text-align: center;
-}
-
 input::placeholder{
   color: var(--white);
   opacity: .5;
-  text-align: center;
   transition-property: opacity;
   transition-duration: 200ms;
   transition-timing-function: ease;
