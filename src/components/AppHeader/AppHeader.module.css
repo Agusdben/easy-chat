@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem;
+}
+
+.user_section {
+  display: flex;
+  gap: .5rem;
+}
+
+.user_section svg {
+  font-size: inherit;
+}

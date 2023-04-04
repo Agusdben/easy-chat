@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import styles from './Layout.module.css'
 import { Roboto } from 'next/font/google'
+import AppHeader from '../AppHeader'
 
 const roboto = Roboto({ subsets: ['latin'], weight: '400' })
 
@@ -19,7 +20,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={`${roboto.className} ${styles.app}` }>
-        <header>header</header>
+        <AppHeader />
         <main className={styles.main}>
           {children}
         </main>
