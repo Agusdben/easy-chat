@@ -2,7 +2,7 @@ export interface Room {
   roomName: string
   creator: string
   usersNumber: number
-  users: string[]
+  users: Array<{ username: string, id: string }>
 }
 
 export type NewRoom = Pick<Room, 'roomName' | 'creator'>

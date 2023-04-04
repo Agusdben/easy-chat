@@ -104,7 +104,7 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
           <section>
             <h1>USERS:</h1>
             {
-              room?.users.map(user => <div key={user}>{user}</div>)
+              room?.users.map(user => <div key={user.id}>{user.username}</div>)
             }
           </section>
       </AuthRoute>
