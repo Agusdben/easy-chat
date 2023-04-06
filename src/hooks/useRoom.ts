@@ -11,7 +11,7 @@ interface Props {
 
 interface ReturnTypes {
   room: Room | null
-  messageList: Message[]
+  messages: Message[]
 }
 
 const useRoom = ({ roomName }: Props): ReturnTypes => {
@@ -19,7 +19,7 @@ const useRoom = ({ roomName }: Props): ReturnTypes => {
   const { user } = useUser()
 
   const [room, setRoom] = useState<Room | null>(null)
-  const [messageList, setMessageList] = useState<Message[]>([])
+  const [messages, setMessages] = useState<Message[]>([])
 
   const router = useRouter()
 
@@ -31,11 +31,11 @@ const useRoom = ({ roomName }: Props): ReturnTypes => {
     }
 
     const onServerReceiveMessage = (data: Message): void => {
-      setMessageList((list) => [...list, data])
+      setMessages((list) => [...list, data])
     }
 
     const onServerSendRoomMessages = (messages: Message[]): void => {
-      setMessageList(messages)
+      setMessages(messages)
     }
 
     const onServerError = (error: string): void => {
@@ -76,7 +76,7 @@ const useRoom = ({ roomName }: Props): ReturnTypes => {
 
   return {
     room,
-    messageList
+    messages
   }
 }
 
