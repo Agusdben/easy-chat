@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { type GetServerSideProps } from 'next'
 
@@ -17,18 +17,59 @@ interface Props {
 
 const RoomPage: React.FC<Props> = ({ roomName }) => {
   const { room, messageList } = useRoom({ roomName })
-
   const messagesListRef = useRef<HTMLDivElement>(null)
+  const messagesListEl = messagesListRef.current
 
-  const scrollMessagesToBottom = (): void => {
-    if (messagesListRef.current === null) return
-    const scrollTop = messagesListRef.current?.scrollHeight
-    messagesListRef.current.scrollTop = scrollTop
-  }
+  const [thereAreUnreadMessages, setThereAreUnreadMessages] = useState(false)
+  const [indexLastMessageRead, setIndexLastMessageRead] = useState(messageList.length - 1)
+  const [isOnBottom, setIsOnBottom] = useState(true)
+
+  const scrollMessagesToBottom = useCallback((): void => {
+    if (messagesListEl === null) return
+    const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
+    messagesListEl.scrollTop = scrollHeight
+  }, [messagesListEl])
+
+  const onScroll = useCallback((): void => {
+    if (messagesListEl === null) return
+
+    const maxScrollTop = Math.ceil(messagesListEl.scrollTop)
+
+    const scrollHeight = messagesListEl.scrollHeight
+    const offsetHeight = messagesListEl.offsetHeight
+
+    const scrollPosition = Math.ceil(scrollHeight - offsetHeight)
+
+    if (maxScrollTop === scrollPosition) {
+      if (isOnBottom && !thereAreUnreadMessages) return
+      setIsOnBottom(true)
+      setThereAreUnreadMessages(false)
+      setIndexLastMessageRead(messageList.length - 1)
+    } else {
+      if (!isOnBottom) return
+      setIsOnBottom(false)
+    }
+  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, messageList.length])
 
   useEffect(() => {
-    scrollMessagesToBottom()
-  }, [messagesListRef.current])
+    if (messagesListEl === null) return
+
+    messagesListEl.addEventListener('scroll', onScroll)
+    messagesListEl.addEventListener('touchmove', onScroll)
+
+    return () => {
+      messagesListEl.removeEventListener('scroll', onScroll)
+      messagesListEl.removeEventListener('touchmove', onScroll)
+    }
+  }, [messagesListEl, onScroll])
+
+  useEffect(() => {
+    if (isOnBottom) {
+      scrollMessagesToBottom()
+    } else {
+      setThereAreUnreadMessages(true)
+    }
+  }, [messageList])
 
   return (
     <SocketConnectedRoute>
@@ -43,8 +84,30 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
             </header>
             <div ref={messagesListRef} className={styles.messages}>
               {
-                messageList.map(msg => <MessageItem key={msg.date.toString()} message={msg} />)
+                messageList.map((msg, index) => {
+                  const isLastMessageReadLastMessage = indexLastMessageRead === messageList.length - 1
+                  return (
+                    <div key={msg.date.toString()} className={styles.message}>
+                      <MessageItem message={msg} />
+                      {
+                        indexLastMessageRead === index && !isLastMessageReadLastMessage &&
+                          <div className={styles.unread_messages}>
+                            <p>⬇ Unread ⬇</p>
+                          </div>
+                      }
+                    </div>
+                  )
+                })
               }
+              {thereAreUnreadMessages && (
+                <>
+
+                  <div className={styles.new_messages}>
+                    <p>New messages ⬇</p>
+                  </div>
+                </>
+              )}
+
             </div>
             <SendMessageForm room={room} />
           </section>
