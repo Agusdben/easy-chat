@@ -1,0 +1,8 @@
+.form_message {
+  display: flex;
+  gap: .5rem;
+}
+
+.form_message svg {
+  fill: var(--black);
+}

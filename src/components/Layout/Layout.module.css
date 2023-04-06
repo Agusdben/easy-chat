@@ -1,5 +1,6 @@
 .app{
   height: 100vh;
+  min-width: 100vw;
   max-width: var(--size-xl);
   margin: auto;
   display: grid;

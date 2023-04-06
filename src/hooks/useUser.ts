@@ -1,5 +1,5 @@
 import { UserContext } from '@/context/UserContext'
-import { type UserUsername, type User } from '@/types/user'
+import { type UserUsername, type User, type UserInterface } from '@/types/user'
 import { useContext, useEffect } from 'react'
 import useSocket from './useSocket'
 import { useRouter } from 'next/router'
@@ -17,8 +17,8 @@ const useUser = (): ReturnTypes => {
   useEffect(() => {
     if (socket == null || isConnected === false) return
 
-    const onUserAuthenticated = ({ username }: UserUsername): void => {
-      setUser({ username })
+    const onUserAuthenticated = ({ username, id }: UserInterface): void => {
+      setUser({ username, id })
       console.log(username)
       router.push('/')
         .catch(error => {

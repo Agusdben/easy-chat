@@ -14,7 +14,7 @@ interface ReturnTypes {
 
 const useRooms = (): ReturnTypes => {
   const [rooms, setRooms] = useState<Room[] | undefined >(undefined)
-  const [query, setQuery] = useState('f')
+  const [query, setQuery] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
 
   const router = useRouter()

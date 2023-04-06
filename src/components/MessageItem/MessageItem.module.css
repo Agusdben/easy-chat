@@ -1,0 +1,35 @@
+.message,
+.message_author {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  gap: 5px;
+  background: var(--black-800);
+  border-radius: 5px;
+}
+
+.message {
+  margin-right: auto;
+}
+
+.message_author {
+  margin-left: auto;
+}
+
+.author{
+  color: var(--color-primary);
+}
+
+.message_content{
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.message_content p {
+  word-break: break-word;
+  text-align: left;
+  line-height: 1.7rem;
+}

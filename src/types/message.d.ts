@@ -1,6 +1,6 @@
 export interface Message {
   roomName: string
-  author: string
+  author: { id: string, username: string }
   message: string
   date: Date
 }
