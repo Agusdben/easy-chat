@@ -19,10 +19,10 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
   const { room, messageList } = useRoom({ roomName })
   const messagesListRef = useRef<HTMLDivElement>(null)
   const messagesListEl = messagesListRef.current
-  const messagesNumber = messageList.length
+  const numberOfMessages = messageList.length
 
   const [thereAreUnreadMessages, setThereAreUnreadMessages] = useState(false)
-  const [indexLastMessageRead, setIndexLastMessageRead] = useState(messagesNumber)
+  const [indexLastMessageRead, setIndexLastMessageRead] = useState(numberOfMessages)
   const [isOnBottom, setIsOnBottom] = useState(true)
 
   const scrollMessagesToBottom = useCallback((): void => {
@@ -44,13 +44,15 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
     if (maxScrollTop === scrollPosition) {
       if (isOnBottom && !thereAreUnreadMessages) return
       setIsOnBottom(true)
-      setThereAreUnreadMessages(false)
-      setIndexLastMessageRead(messagesNumber)
+      setTimeout(() => {
+        setThereAreUnreadMessages(false)
+      }, 1200)
+      setIndexLastMessageRead(numberOfMessages)
     } else {
       if (!isOnBottom) return
       setIsOnBottom(false)
     }
-  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, messagesNumber])
+  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, numberOfMessages])
 
   useEffect(() => {
     if (messagesListEl === null) return
@@ -87,7 +89,7 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
             <div ref={messagesListRef} className={styles.messages}>
               {
                 messageList.map((msg, index) => {
-                  const isLastMessageReadLastMessage = indexLastMessageRead === messagesNumber
+                  const isLastMessageReadLastMessage = indexLastMessageRead === numberOfMessages
                   return (
                     <div key={msg.date.toString()} className={styles.message}>
                       <MessageItem message={msg} />
@@ -103,7 +105,6 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
               }
               {thereAreUnreadMessages && (
                 <>
-
                   <div className={styles.new_messages}>
                     <p>New messages ⬇</p>
                   </div>
