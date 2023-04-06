@@ -19,9 +19,10 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
   const { room, messageList } = useRoom({ roomName })
   const messagesListRef = useRef<HTMLDivElement>(null)
   const messagesListEl = messagesListRef.current
+  const messagesNumber = messageList.length
 
   const [thereAreUnreadMessages, setThereAreUnreadMessages] = useState(false)
-  const [indexLastMessageRead, setIndexLastMessageRead] = useState(messageList.length - 1)
+  const [indexLastMessageRead, setIndexLastMessageRead] = useState(messagesNumber)
   const [isOnBottom, setIsOnBottom] = useState(true)
 
   const scrollMessagesToBottom = useCallback((): void => {
@@ -44,12 +45,12 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
       if (isOnBottom && !thereAreUnreadMessages) return
       setIsOnBottom(true)
       setThereAreUnreadMessages(false)
-      setIndexLastMessageRead(messageList.length - 1)
+      setIndexLastMessageRead(messagesNumber)
     } else {
       if (!isOnBottom) return
       setIsOnBottom(false)
     }
-  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, messageList.length])
+  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, messagesNumber])
 
   useEffect(() => {
     if (messagesListEl === null) return
@@ -69,6 +70,7 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
     } else {
       setThereAreUnreadMessages(true)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messageList])
 
   return (
@@ -85,12 +87,12 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
             <div ref={messagesListRef} className={styles.messages}>
               {
                 messageList.map((msg, index) => {
-                  const isLastMessageReadLastMessage = indexLastMessageRead === messageList.length - 1
+                  const isLastMessageReadLastMessage = indexLastMessageRead === messagesNumber
                   return (
                     <div key={msg.date.toString()} className={styles.message}>
                       <MessageItem message={msg} />
                       {
-                        indexLastMessageRead === index && !isLastMessageReadLastMessage &&
+                        indexLastMessageRead === index && !isLastMessageReadLastMessage && !isOnBottom &&
                           <div className={styles.unread_messages}>
                             <p>⬇ Unread ⬇</p>
                           </div>
