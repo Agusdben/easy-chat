@@ -23,13 +23,13 @@ const MessageList: React.FC<Props> = ({ messages }) => {
           const isLastMessageReadLastMessage = indexLastMessageRead === numberOfMessages
           return (
             <div key={msg.date.toString()} className={styles.message}>
-              <MessageItem message={msg} />
               {
                 indexLastMessageRead === index && !isLastMessageReadLastMessage && !isOnBottom &&
                   <div className={styles.unread_messages}>
                     <p>⬇ Unread ⬇</p>
                   </div>
               }
+              <MessageItem message={msg} />
             </div>
           )
         })
@@ -37,7 +37,7 @@ const MessageList: React.FC<Props> = ({ messages }) => {
       {thereAreUnreadMessages && (
         <>
           <div className={styles.new_messages}>
-            <p>New messages ⬇</p>
+            <p>New messages</p>
           </div>
         </>
       )}

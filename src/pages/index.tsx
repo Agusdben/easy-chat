@@ -21,6 +21,7 @@ const Home: React.FC = () => {
             onShowEmptyChange={handleShowEmptyChange}
           />
           <div className={styles.rooms}>
+            <h3>Rooms: {rooms?.length}</h3>
             {
               rooms === undefined
                 ? <DotLoader />

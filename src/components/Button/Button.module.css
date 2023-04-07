@@ -1,7 +1,7 @@
 .button {
   background-color: var(--color-primary);
   border-radius: 5px;
-  color: var(--black);
+  color: var(--white);
   text-align: center;
   padding: .7rem 1rem;
   transition: transform 150ms;

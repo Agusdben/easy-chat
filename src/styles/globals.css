@@ -1,10 +1,10 @@
 :root{
-  --color-primary: #5a2;
-  --color-secondary: #ff2;
+  --color-primary: #ee4617;
+  --color-secondary: #1787ff;
   --white: #fafafa;
-  --black: #050505;
+  --black: #020202;
   --black-900: #111;
-  --black-800: #151515;
+  --black-800: #202020;
 
   --size-sm: 320px;
   --size-md: 768px;
@@ -65,7 +65,8 @@ input[type='text'] {
   width: 100%;
   padding: .7rem 1rem;
   background-color: transparent;
-  border: 1px solid var(--color-primary);
+  border: none;
+  background-color: var(--black-900);
   transition-property: outline;
   transition-duration: 200ms;
   transition-timing-function: ease;

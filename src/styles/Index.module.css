@@ -3,11 +3,15 @@
   gap: 1rem;
   flex-direction: column;
   height: 100%;
+  max-width: var(--size-md);
+  margin: auto;
 }
 
 .rooms{
   flex: 1;
   display: flex;
-  overflow: auto;
-  background-color: var(--black-800);
+  padding: .5rem;
+  flex-direction: column;
+  overflow-x: visible;
+  overflow-y: auto;
 }
