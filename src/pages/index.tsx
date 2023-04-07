@@ -14,21 +14,21 @@ const Home: React.FC = () => {
     <SocketConnectedRoute>
       <AuthRoute>
         <section className={styles.section}>
+          <CreateRoomForm />
           <RoomsFilters
             queryValue={query}
             showEmptyValue={showEmpty}
             onQueryChange={handleQueryChange}
             onShowEmptyChange={handleShowEmptyChange}
           />
+          <h3>Rooms: {rooms?.length}</h3>
           <div className={styles.rooms}>
-            <h3>Rooms: {rooms?.length}</h3>
             {
               rooms === undefined
                 ? <DotLoader />
                 : <RoomsList rooms={rooms} />
             }
           </div>
-            <CreateRoomForm />
         </section>
       </AuthRoute>
     </SocketConnectedRoute>
