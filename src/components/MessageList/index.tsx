@@ -20,16 +20,16 @@ const MessageList: React.FC<Props> = ({ messages }) => {
     <div ref={messagesListRef} className={styles.messages}>
       {
         messages.map((msg, index) => {
-          const isLastMessageReadLastMessage = indexLastMessageRead === numberOfMessages
+          const isLastMessageReadLastMessage = indexLastMessageRead === numberOfMessages - 1
           return (
             <div key={msg.date.toString()} className={styles.message}>
+              <MessageItem message={msg} />
               {
                 indexLastMessageRead === index && !isLastMessageReadLastMessage && !isOnBottom &&
                   <div className={styles.unread_messages}>
                     <p>⬇ Unread ⬇</p>
                   </div>
               }
-              <MessageItem message={msg} />
             </div>
           )
         })

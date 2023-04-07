@@ -45,7 +45,7 @@ const AuthPage: React.FC = () => {
             <input placeholder='Type here' minLength={3} maxLength={16} required type='text' onChange={(e) => { setUsername(e.target.value) }} value={username}/>
           </label>
           <ErrorMessage message={error}/>
-          <Button disabled={username === ''} type='submit'>Get me inside!</Button>
+          <Button disabled={username === ''} type='submit'>Start chatting!</Button>
         </form>
       </section>
     </SocketConnectedRoute>

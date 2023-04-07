@@ -1,6 +1,7 @@
 import useUser from '@/hooks/useUser'
 import { type Message } from '@/types/message'
 import styles from './MessageItem.module.css'
+import React from 'react'
 
 interface Props {
   message: Message
@@ -29,4 +30,4 @@ const MessageItem: React.FC<Props> = ({ message }) => {
   )
 }
 
-export default MessageItem
+export default React.memo(MessageItem)

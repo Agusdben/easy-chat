@@ -16,40 +16,37 @@ interface ReturnTypes {
 const useUnreadMessages = ({ messages }: Props): ReturnTypes => {
   const messagesListRef = useRef<HTMLDivElement>(null)
   const messagesListEl = messagesListRef.current
+
   const numberOfMessages = messages.length
 
   const [thereAreUnreadMessages, setThereAreUnreadMessages] = useState(false)
   const [indexLastMessageRead, setIndexLastMessageRead] = useState(numberOfMessages)
   const [isOnBottom, setIsOnBottom] = useState(true)
 
-  const scrollMessagesToBottom = useCallback((): void => {
-    if (messagesListEl === null) return
-    const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
-    messagesListEl.scrollTop = scrollHeight
-  }, [messagesListEl])
-
   const onScroll = useCallback((): void => {
     if (messagesListEl === null) return
 
     const maxScrollTop = Math.ceil(messagesListEl.scrollTop)
 
-    const scrollHeight = messagesListEl.scrollHeight
-    const offsetHeight = messagesListEl.offsetHeight
+    const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
+    const offsetHeight = Math.ceil(messagesListEl.offsetHeight)
 
     const scrollPosition = Math.ceil(scrollHeight - offsetHeight)
 
     if (maxScrollTop === scrollPosition) {
-      if (isOnBottom && !thereAreUnreadMessages) return
       setIsOnBottom(true)
-      setTimeout(() => {
-        setThereAreUnreadMessages(false)
-      }, 1200)
-      setIndexLastMessageRead(numberOfMessages)
+      setThereAreUnreadMessages(false)
+      setIndexLastMessageRead(numberOfMessages - 1)
     } else {
-      if (!isOnBottom) return
       setIsOnBottom(false)
     }
-  }, [isOnBottom, messagesListEl, thereAreUnreadMessages, numberOfMessages])
+  }, [messagesListEl, numberOfMessages])
+
+  const scrollMessagesToBottom = useCallback((): void => {
+    if (messagesListEl === null) return
+    const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
+    messagesListEl.scrollTo({ top: scrollHeight, behavior: 'smooth' })
+  }, [messagesListEl])
 
   useEffect(() => {
     if (messagesListEl === null) return
