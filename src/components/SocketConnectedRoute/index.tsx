@@ -1,10 +1,10 @@
 import useSocket from '@/hooks/useSocket'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
 import MessagesIcon from '../Icons/MessagesIcon'
 import styles from './SocketConnectedRoute.module.css'
 import animations from '@/styles/animations.module.css'
 import DotLoader from '../DotLoader'
+import Error from 'next/error'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children: React.ReactNode
@@ -12,16 +12,14 @@ interface Props {
 
 const SocketConnectedRoute: React.FC<Props> = ({ children }) => {
   const { isConnected } = useSocket()
-  const router = useRouter()
+  const [isConnecting, setIsConnecting] = useState(true)
 
   useEffect(() => {
-    if (isConnected === false) {
-      router.push('/500')
-        .catch(error => { console.error(error) })
-    }
-  }, [isConnected, router])
+    if (isConnected === undefined) return
+    setIsConnecting(false)
+  }, [isConnected])
 
-  if (isConnected === undefined) {
+  if (isConnecting) {
     return (
       <section className={styles.container}>
         <MessagesIcon className={animations.pulse} />
@@ -29,6 +27,14 @@ const SocketConnectedRoute: React.FC<Props> = ({ children }) => {
           <p>Connecting</p>
           <DotLoader />
         </div>
+      </section>
+    )
+  }
+
+  if (isConnected === false && !isConnecting) {
+    return (
+      <section className={styles.container}>
+        <Error statusCode={503} title='Our service is offline, try again later' />
       </section>
     )
   }

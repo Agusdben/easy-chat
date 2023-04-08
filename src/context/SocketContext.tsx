@@ -38,7 +38,7 @@ const SocketContextProvider: React.FC<Props> = ({ children }) => {
     if (isConnected === true || isConnected === false || socket == null) return
 
     const onConnect = (): void => {
-      clearTimeout(unableToConnect)
+      clearTimeout(connectionTimeOut)
       setIsConnected(true)
     }
     const onDisconnect = (): void => {
@@ -49,17 +49,15 @@ const SocketContextProvider: React.FC<Props> = ({ children }) => {
     socket?.on('connect', onConnect)
     socket?.on('disconnect', onDisconnect)
 
-    const unableToConnect = setTimeout(() => {
-      if (isConnected === undefined) {
-        onDisconnect()
-        socket?.disconnect()
-      }
-    }, 5000) // 2 min
+    const connectionTimeOut = setTimeout(() => {
+      setIsConnected(false)
+      socket.disconnect()
+    }, 2 * 60 * 1000) // 2 min
 
     return () => {
       socket?.off('connect', onConnect)
       socket?.off('disconnect', onDisconnect)
-      clearTimeout(unableToConnect)
+      clearTimeout(connectionTimeOut)
     }
   }, [socket, isConnected])
 
