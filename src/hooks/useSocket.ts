@@ -13,7 +13,6 @@ const useSocket = (): ReturnTypes => {
   const { socket, isConnected } = useContext(SocketContext)
 
   const handleCreateRoom = (room: NewRoom): void => {
-    console.log(room)
     socket?.emit('client:create_room', room)
   }
 
