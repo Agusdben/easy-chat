@@ -5,6 +5,9 @@ import { type NewRoom } from '@/types/room'
 import useSocket from '@/hooks/useSocket'
 import styles from './CreateRoomForm.module.css'
 
+const MAX_ROOM_NAME_LENGTH = 20
+const MIN_ROOM_NAME_LENGTH = 3
+
 const CreateRoomForm: React.FC = () => {
   const { user } = useUser()
   const { handleCreateRoom } = useSocket()
@@ -28,7 +31,8 @@ const CreateRoomForm: React.FC = () => {
   const handleSubmitRoom = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     setError('')
-    if (room === '') {
+
+    if (room === '' || room.length > MAX_ROOM_NAME_LENGTH || room.length < MIN_ROOM_NAME_LENGTH) {
       setError('Invalid room name')
       return
     }
@@ -44,7 +48,7 @@ const CreateRoomForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmitRoom} className={styles.room_form}>
-      <input placeholder='enter room name' type='text' minLength={3} maxLength={20} required onChange={(e) => { setRoom(e.target.value) }} value={room}/>
+      <input placeholder='enter room name' type='text' minLength={MIN_ROOM_NAME_LENGTH} maxLength={MAX_ROOM_NAME_LENGTH} required onChange={(e) => { setRoom(e.target.value) }} value={room}/>
       <small>{error}</small>
       <Button type='submit'>Create</Button>
     </form>
