@@ -13,16 +13,15 @@ const AuthRoute: React.FC<Props> = ({ children }) => {
 
   const router = useRouter()
   useEffect(() => {
-    if (user === null) {
+    setAuthenticating(true)
+    if (user === null && router.isReady) {
       router.push('/auth')
-        .then(() => {
-          setAuthenticating(false)
-        })
         .catch(error => { console.error(error) })
     }
+    setAuthenticating(false)
   }, [user, router])
 
-  if (authenticating) {
+  if (authenticating || user === null) {
     return (
         <p>Loading...</p>
     )
