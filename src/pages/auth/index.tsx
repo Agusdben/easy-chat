@@ -6,14 +6,21 @@ import Button from '@/components/Button'
 import ErrorMessage from '@/components/ErrorMessage'
 import SocketConnectedRoute from '@/components/SocketConnectedRoute'
 import useSocket from '@/hooks/useSocket'
+import { useRouter } from 'next/router'
 
 const AuthPage: React.FC = () => {
   const [username, setUsername] = useState('')
-  const { authUser } = useUser()
+  const { authUser, user } = useUser()
   const { socket } = useSocket()
   const [error, setError] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
+    if (user != null) {
+      router.push('/')
+        .catch(error => { console.error(error) })
+    }
+
     const onServerError = (error: string): void => {
       setError(error)
     }
@@ -23,7 +30,7 @@ const AuthPage: React.FC = () => {
     return () => {
       socket?.off('server:error', onServerError)
     }
-  }, [socket])
+  }, [socket, user, router])
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()

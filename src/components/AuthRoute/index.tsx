@@ -1,6 +1,7 @@
 import useUser from '@/hooks/useUser'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import DotLoader from '../DotLoader'
 
 interface Props {
   children: React.ReactNode
@@ -23,7 +24,7 @@ const AuthRoute: React.FC<Props> = ({ children }) => {
 
   if (authenticating || user === null) {
     return (
-        <p>Loading...</p>
+      <DotLoader />
     )
   }
 
