@@ -31,11 +31,11 @@ const useRoom = ({ roomName }: Props): ReturnTypes => {
     }
 
     const onServerReceiveMessage = (data: Message): void => {
-      setMessages((list) => [...list, data])
+      setMessages((list) => [...list, data].slice(-100))
     }
 
     const onServerSendRoomMessages = (messages: Message[]): void => {
-      setMessages(messages)
+      setMessages(messages.slice(-100))
     }
 
     const onServerError = (error: string): void => {
@@ -48,11 +48,7 @@ const useRoom = ({ roomName }: Props): ReturnTypes => {
       if (error === 'Room does not exists') {
         router.push('/')
           .catch(error => { console.error(error) })
-        return
       }
-
-      router.push('/500')
-        .catch(error => { console.error(error) })
     }
 
     socket.emit('client:join_room', ({ roomName, username: user?.username }))
