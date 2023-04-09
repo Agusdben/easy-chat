@@ -7,11 +7,32 @@
   margin: auto;
 }
 
-.rooms{
-  flex: 1;
+.section_header {
   display: flex;
-  padding: .5rem;
   flex-direction: column;
+  gap: inherit;
+}
+
+.rooms_container {
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: .5rem;
+}
+
+.rooms{
+  padding: .5rem;
+
   overflow-x: visible;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.rooms_footer {
+  display: flex;
+  padding: .5rem;
+  justify-content: flex-end;
 }

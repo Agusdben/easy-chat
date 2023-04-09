@@ -10,6 +10,7 @@ interface ReturnTypes {
   showEmpty: boolean
   handleQueryChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
   handleShowEmptyChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
+  refreshRoomList: () => void
 }
 
 const useRooms = (): ReturnTypes => {
@@ -47,6 +48,10 @@ const useRooms = (): ReturnTypes => {
     }
   }, [isConnected, socket, user, router])
 
+  const refreshRoomList = (): void => {
+    socket?.emit('client:get_rooms', { username: user?.username })
+  }
+
   const handleQueryChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setQuery(evt.target.value)
   }
@@ -73,7 +78,8 @@ const useRooms = (): ReturnTypes => {
     query,
     showEmpty,
     handleQueryChange,
-    handleShowEmptyChange
+    handleShowEmptyChange,
+    refreshRoomList
   }
 }
 
