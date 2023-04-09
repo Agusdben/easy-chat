@@ -22,10 +22,11 @@ const useUnreadMessages = ({ messages }: Props): ReturnTypes => {
   const [thereAreUnreadMessages, setThereAreUnreadMessages] = useState(false)
   const [indexLastMessageRead, setIndexLastMessageRead] = useState(numberOfMessages)
   const [isOnBottom, setIsOnBottom] = useState(true)
+  const [isScrolling, setIsScrolling] = useState(false)
 
   const onScroll = useCallback((): void => {
     if (messagesListEl === null) return
-
+    setIsScrolling(true)
     const maxScrollTop = Math.ceil(messagesListEl.scrollTop)
 
     const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
@@ -40,12 +41,14 @@ const useUnreadMessages = ({ messages }: Props): ReturnTypes => {
     } else {
       setIsOnBottom(false)
     }
+
+    setIsScrolling(false)
   }, [messagesListEl, numberOfMessages])
 
   const scrollMessagesToBottom = useCallback((): void => {
     if (messagesListEl === null) return
-    const scrollHeight = Math.ceil(messagesListEl.scrollHeight)
-    messagesListEl.scrollTo({ top: scrollHeight, behavior: 'smooth' })
+    const scrollHeight = messagesListEl.scrollHeight
+    messagesListEl.scrollTop = scrollHeight
   }, [messagesListEl])
 
   useEffect(() => {
@@ -61,13 +64,13 @@ const useUnreadMessages = ({ messages }: Props): ReturnTypes => {
   }, [messagesListEl, onScroll])
 
   useEffect(() => {
-    if (isOnBottom) {
+    if (isOnBottom && !isScrolling) {
       scrollMessagesToBottom()
     } else {
       setThereAreUnreadMessages(true)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages])
+  }, [messages, isScrolling])
 
   return {
     messagesListRef,
