@@ -1,0 +1,28 @@
+.user_list {
+  border-radius: 5px;
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  overflow: auto;
+  padding-right: 5px;
+}
+
+.user_list li {
+  display: flex;
+  gap: .5rem;
+}
+
+.user_list .you {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.user_list svg {
+  font-size: inherit;
+  flex-shrink: 0;
+}
+
+.user_list span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

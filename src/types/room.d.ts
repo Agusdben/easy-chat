@@ -1,10 +1,10 @@
-interface User { username: string, id: string }
+import { type UserInterface } from './user'
 
 export interface Room {
   roomName: string
-  creator: User
+  creator: UserInterface
   usersNumber: number
-  users: User[]
+  users: UserInterface[]
 }
 
 export type NewRoom = Pick<Room, 'roomName' | 'creator'>
