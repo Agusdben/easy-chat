@@ -10,11 +10,6 @@
   --size-md: 768px;
   --size-lg: 1024px;
   --size-xl: 1280px;
-
-  --break-point-sm: var(--size-sm);
-  --break-point-md: var(--size-md);
-  --break-point-lg: var(--size-lg);
-  --break-point-xl: var(--size-xl);
 }
 
 *,
