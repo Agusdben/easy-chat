@@ -4,12 +4,11 @@
   padding: 1rem ;
   border-radius: 5px;
   background-color: var(--black);
-  box-shadow: 0 0 10px var(--black-800);
   transition: box-shadow 150ms ease, transform ;
 }
 
 .room:hover{
-  box-shadow: 0 0 10px var(--color-primary);
+  box-shadow: 0 0 10px var(--color-secondary);
 }
 
 .room_info{

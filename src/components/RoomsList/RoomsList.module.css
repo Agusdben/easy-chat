@@ -4,12 +4,3 @@
   gap: 1rem;
   width: 100%;
 }
-
-.empty {
-  margin: auto;
-  padding: 1rem;
-  border-radius: 5px;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  background-color: var(--black);
-}

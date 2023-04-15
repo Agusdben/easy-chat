@@ -15,16 +15,22 @@
 
 .rooms_container {
   display: flex;
-  gap: .5rem;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  background: var(--black-900);
+  border-radius: 5px;
+}
+
+.rooms_container h3 {
   padding: .5rem;
+  margin: 0;
+  background: var(--color-secondary);
+  color: var(--black);
 }
 
 .rooms{
   padding: .5rem;
-
   overflow-x: visible;
   overflow-y: auto;
   display: flex;
