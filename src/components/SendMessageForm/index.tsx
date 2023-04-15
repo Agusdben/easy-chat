@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../Button'
 import PaperPlaneIcon from '../Icons/PaperPlaneIcon'
 import styles from './SendMessageForm.module.css'
@@ -13,9 +13,35 @@ interface Props {
 
 const SendMessageForm: React.FC<Props> = ({ room }) => {
   const [newMessage, setNewMessage] = useState('')
-
+  const [placeholder, setPlaceholder] = useState('Type a message')
   const { user } = useUser()
   const { socket } = useSocket()
+
+  useEffect(() => {
+    const onServerError = (message: string): void => {
+      if (message.includes('Spam')) {
+        if (placeholder !== 'Type a message') return
+
+        let seconds = 10
+
+        const preventSpam = setInterval(() => {
+          seconds--
+          if (seconds === 0) {
+            setPlaceholder('Type a message')
+            clearInterval(preventSpam)
+            return
+          }
+          setPlaceholder(`You are so fast typing, please wait ${seconds} seconds`)
+        }, 1000)
+      }
+    }
+
+    socket?.on('server:error', onServerError)
+
+    return () => {
+      socket?.off('server:error', onServerError)
+    }
+  }, [socket, placeholder])
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -38,7 +64,7 @@ const SendMessageForm: React.FC<Props> = ({ room }) => {
 
   return (
     <form onSubmit={handleSubmitMessage} className={styles.form_message}>
-      <input maxLength={128} minLength={1} required type='text' placeholder='Type a message' value={newMessage} onChange={(e) => { setNewMessage(e.target.value) }}/>
+      <input maxLength={128} minLength={1} required type='text' placeholder={placeholder} value={newMessage} onChange={(e) => { setNewMessage(e.target.value) }}/>
       <Button>
         <PaperPlaneIcon />
       </Button>
