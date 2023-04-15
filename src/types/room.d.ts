@@ -1,8 +1,10 @@
+interface User { username: string, id: string }
+
 export interface Room {
   roomName: string
-  creator: string
+  creator: User
   usersNumber: number
-  users: Array<{ username: string, id: string }>
+  users: User[]
 }
 
 export type NewRoom = Pick<Room, 'roomName' | 'creator'>

@@ -22,7 +22,7 @@ const RoomItem: React.FC<Props> = ({ room }) => {
       </div>
       <div className={styles.creator_container}>
         <p>Created by</p>
-        <p className={styles.creator}>{room.creator === user?.username ? 'You' : room.creator}</p>
+        <p className={styles.creator}>{room.creator.id === user?.id ? 'You' : room.creator.username}</p>
       </div>
     </div>
   )

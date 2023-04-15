@@ -39,7 +39,10 @@ const CreateRoomForm: React.FC = () => {
 
     const newRoom: NewRoom = {
       roomName: room,
-      creator: user?.username ?? ''
+      creator: {
+        id: user?.id ?? '',
+        username: user?.username ?? ''
+      }
     }
 
     handleCreateRoom(newRoom)
