@@ -19,6 +19,10 @@
   background-color: var(--black-900);
 }
 
+.chat_header h3 {
+  color: var(--color-primary);
+}
+
 .chat_users svg {
   font-size: inherit;
 }
