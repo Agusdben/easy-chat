@@ -11,6 +11,8 @@ import MessageList from '@/components/MessageList'
 import UserList from '@/components/UserLists'
 import { useState } from 'react'
 import XMarkIcon from '@/components/Icons/XMarkIcon'
+import ArrowLeftIcon from '@/components/Icons/ArrowLeftIcon'
+import { useRouter } from 'next/router'
 
 interface Props {
   roomName: string
@@ -22,8 +24,13 @@ interface UserListStyles extends React.CSSProperties {
 
 const RoomPage: React.FC<Props> = ({ roomName }) => {
   const { room, messages } = useRoom({ roomName })
-
+  const router = useRouter()
   const [toggleUserList, setToggleUserList] = useState(false)
+
+  const handleLeaveRoom = (): void => {
+    router.push('/')
+      .catch(error => { console.error(error) })
+  }
 
   const handleToggleUserList = (): void => {
     setToggleUserList(!toggleUserList)
@@ -37,6 +44,10 @@ const RoomPage: React.FC<Props> = ({ roomName }) => {
           <section className={styles.section}>
             <div className={styles.chat}>
               <header className={styles.chat_header}>
+                <button onClick={handleLeaveRoom} className={styles.leave_button}>
+                  <ArrowLeftIcon />
+                  <span>Leave</span>
+                </button>
                 <h3>{room?.roomName}</h3>
                 <div className={styles.chat_users}>
                   <button onClick={handleToggleUserList}>
