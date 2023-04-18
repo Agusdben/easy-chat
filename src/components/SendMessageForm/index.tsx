@@ -17,11 +17,13 @@ const SendMessageForm: React.FC<Props> = ({ room }) => {
   const [newMessage, setNewMessage] = useState('')
   const [placeholder, setPlaceholder] = useState(initialPlaceholderValue)
   const [spamCount, setSpamCount] = useState(0)
+
   const { user } = useUser()
   const { socket } = useSocket()
 
   useEffect(() => {
     const onServerError = (message: string): void => {
+      setNewMessage('')
       if (message.includes('Spam')) {
         if (placeholder !== initialPlaceholderValue) return
 
