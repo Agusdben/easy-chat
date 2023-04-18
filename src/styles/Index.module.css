@@ -3,7 +3,6 @@
   gap: 1rem;
   flex-direction: column;
   height: 100%;
-  max-width: var(--size-md);
   margin: auto;
 }
 
