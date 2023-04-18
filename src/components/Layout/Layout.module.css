@@ -1,7 +1,7 @@
 .app{
   height: 100vh;
-  min-width: 100vw;
-  max-width: var(--size-xl);
+  width: 100vw;
+  max-width: var(--size-lg);
   margin: auto;
   display: grid;
   gap: 1rem;

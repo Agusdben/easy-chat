@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './Layout.module.css'
 import { Roboto } from 'next/font/google'
 import AppHeader from '../AppHeader'
+import AppFooter from '../AppFooter'
 
 const roboto = Roboto({ subsets: ['latin'], weight: '400' })
 
@@ -24,7 +25,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <main className={styles.main}>
           {children}
         </main>
-        <footer>footer</footer>
+        <AppFooter />
       </div>
     </>
   )
