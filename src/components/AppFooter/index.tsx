@@ -10,6 +10,7 @@ const AppFooter: React.FC = () => {
       </section>
       <section className={styles.links}>
         <Link target='_black' rel='noopener noreferrer' href='https://www.linkedin.com/in/agusdben/'>Linkedin</Link>
+        |
         <Link target='_black' rel='noopener noreferrer' href='https://github.com/Agusdben'>GitHub</Link>
       </section>
     </footer>
